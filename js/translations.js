@@ -56,7 +56,6 @@ const TRANSLATIONS = {
 
         // Footer
         footer1: "AmmoniakEmissie Model V2.0 — Farm Technology Group — WUR",
-        footer2: "Het model is slechts getest voor een beperkt aantal praktijksituaties.",
         footer3: "Gebaseerd op Snelstal (Monteny, 1998)",
 
         // Language toggle
@@ -113,7 +112,6 @@ const TRANSLATIONS = {
 
         // Footer
         footer1: "AmmoniaEmission Model V2.0 — Farm Technology Group — WUR",
-        footer2: "The model has only been tested for a limited number of practical situations.",
         footer3: "Based on Snelstal (Monteny, 1998)",
 
         // Language toggle
