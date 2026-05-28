@@ -1,0 +1,309 @@
+/* =====================================================================
+   Snelstal Ammonia Emission Model — Stylesheet
+   Visual style inspired by the original emissie.exe GTK interface,
+   modernized with clean typography and subtle card-based sections.
+   ===================================================================== */
+
+:root {
+    --color-bg: #f5f5f0;
+    --color-card: #ffffff;
+    --color-border: #c8c8c0;
+    --color-border-section: #8a9a6e;
+    --color-text: #2c2c2c;
+    --color-text-muted: #666;
+    --color-label: #333;
+    --color-accent: #4a6b2a;
+    --color-accent-hover: #5d8436;
+    --color-header-bg: #e8ede0;
+    --color-input-bg: #fff;
+    --color-input-border: #b0b0a8;
+    --color-input-focus: #6b8f3f;
+    --color-result-bg: #f0f4e8;
+    --color-result-border: #a8b890;
+    --color-footer: #888;
+    --font-main: "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "Consolas", "SF Mono", "Monaco", monospace;
+    --max-width: 640px;
+    --radius: 6px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 15px;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+/* Layout */
+.app-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+}
+
+/* Header */
+.app-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.app-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: -0.02em;
+}
+
+.app-subtitle {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+}
+
+/* Language toggle */
+.lang-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.3rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.lang-toggle:hover {
+    background: var(--color-header-bg);
+}
+
+/* Section cards */
+.section {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.section-header {
+    background: var(--color-header-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    letter-spacing: 0.02em;
+}
+
+.section-body {
+    padding: 0.75rem 1rem;
+}
+
+/* Form rows */
+.form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    gap: 0.75rem;
+}
+
+.form-row label {
+    flex: 1;
+    font-size: 0.88rem;
+    color: var(--color-label);
+    white-space: nowrap;
+}
+
+.form-row input[type="number"] {
+    width: 120px;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid var(--color-input-border);
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    text-align: right;
+    background: var(--color-input-bg);
+    color: var(--color-text);
+    transition: border-color 0.15s;
+}
+
+.form-row input[type="number"]:focus {
+    outline: none;
+    border-color: var(--color-input-focus);
+    box-shadow: 0 0 0 2px rgba(107, 143, 63, 0.15);
+}
+
+/* Pit mode radio buttons */
+.pit-mode-row {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 0;
+    margin-bottom: 0.25rem;
+}
+
+.pit-mode-row label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-accent);
+    cursor: pointer;
+}
+
+.pit-mode-row input[type="radio"] {
+    accent-color: var(--color-accent);
+}
+
+.pit-specific-fields {
+    transition: opacity 0.2s;
+}
+
+.pit-specific-fields.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Calculate button */
+.calculate-row {
+    text-align: center;
+    margin: 1.25rem 0;
+}
+
+.btn-calculate {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.65rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    letter-spacing: 0.02em;
+}
+
+.btn-calculate:hover {
+    background: var(--color-accent-hover);
+}
+
+.btn-calculate:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+/* Results table */
+.results-section {
+    background: var(--color-card);
+    border: 1px solid var(--color-result-border);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: none;
+}
+
+.results-section.visible {
+    display: block;
+}
+
+.results-header {
+    background: var(--color-result-bg);
+    border-bottom: 1px solid var(--color-result-border);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent);
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.results-table th {
+    text-align: right;
+    padding: 0.5rem 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-result-bg);
+}
+
+.results-table th:first-child {
+    text-align: left;
+    width: 80px;
+}
+
+.results-table td {
+    text-align: right;
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-mono);
+    border-bottom: 1px solid #eee;
+}
+
+.results-table td:first-child {
+    text-align: left;
+    font-family: var(--font-main);
+    font-weight: 500;
+}
+
+.results-table tr:last-child td {
+    border-bottom: none;
+    font-weight: 700;
+}
+
+.results-note {
+    padding: 0.5rem 1rem;
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.78rem;
+    color: var(--color-footer);
+    line-height: 1.6;
+}
+
+.app-footer em {
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .app-container {
+        padding: 1rem 0.75rem 2rem;
+    }
+
+    .form-row input[type="number"] {
+        width: 100px;
+    }
+}

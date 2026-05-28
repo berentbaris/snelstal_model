@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AmmoniakEmissie Model V2.0</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+
+        <!-- Header -->
+        <header class="app-header">
+            <h1 class="app-title" data-i18n="title">AmmoniakEmissie Model V2.0</h1>
+            <p class="app-subtitle" data-i18n="subtitle">Snelstal — Emissiemodel voor melkveestallen</p>
+            <button class="lang-toggle" id="langToggle" data-i18n="langToggle">English</button>
+        </header>
+
+        <!-- General section -->
+        <div class="section">
+            <div class="section-header" data-i18n="sectionGeneral">Algemeen</div>
+            <div class="section-body">
+                <div class="form-row">
+                    <label for="numRuns" data-i18n="labelRuns">Aantal berekeningen [#]:</label>
+                    <input type="number" id="numRuns" value="10" min="1" max="50" step="1">
+                </div>
+                <div class="form-row">
+                    <label for="calcPeriod" data-i18n="labelPeriod">Rekenperiode [dagen]:</label>
+                    <input type="number" id="calcPeriod" value="30" min="1" max="365" step="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Animals section -->
+        <div class="section">
+            <div class="section-header" data-i18n="sectionAnimals">Dieren</div>
+            <div class="section-body">
+                <div class="form-row">
+                    <label for="numCows" data-i18n="labelCows">Aantal dieren [#]:</label>
+                    <input type="number" id="numCows" value="100" min="1" max="500" step="1">
+                </div>
+                <div class="form-row">
+                    <label for="urinationFreq" data-i18n="labelFrequency">Urineer frequentie [loz/dag]:</label>
+                    <input type="number" id="urinationFreq" value="10" min="8" max="12" step="1">
+                </div>
+                <div class="form-row">
+                    <label for="ureaNConc" data-i18n="labelUrea">Ureum concentratie [g-N/l]:</label>
+                    <input type="number" id="ureaNConc" value="5.00" min="0" max="20" step="0.01">
+                </div>
+                <div class="form-row">
+                    <label for="tanConc" data-i18n="labelTAN">Mestsamenstelling [g-N/l]:</label>
+                    <input type="number" id="tanConc" value="3.50" min="0" max="100" step="0.01">
+                </div>
+                <div class="form-row">
+                    <label for="grazingHours" data-i18n="labelGrazing">Beweiding [uur/dag]:</label>
+                    <input type="number" id="grazingHours" value="0" min="0" max="24" step="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Floor section -->
+        <div class="section">
+            <div class="section-header" data-i18n="sectionFloor">Vloer</div>
+            <div class="section-body">
+                <div class="form-row">
+                    <label for="floorArea" data-i18n="labelFloorArea">Oppervlak [m&sup2;]:</label>
+                    <input type="number" id="floorArea" value="350" min="1" max="5000" step="1">
+                </div>
+                <div class="form-row">
+                    <label for="floorTemp" data-i18n="labelFloorTemp">Temperatuur [&deg;C]:</label>
+                    <input type="number" id="floorTemp" value="10" min="0" max="40" step="0.1">
+                </div>
+                <div class="form-row">
+                    <label for="floorAirSpeed" data-i18n="labelFloorAirSpeed">Luchtsnelheid [m/s]:</label>
+                    <input type="number" id="floorAirSpeed" value="0.15" min="0" max="2" step="0.01">
+                </div>
+                <div class="form-row">
+                    <label for="poolArea" data-i18n="labelPoolArea">Plas oppervlak [m&sup2;]:</label>
+                    <input type="number" id="poolArea" value="0.80" min="0" max="5" step="0.01">
+                </div>
+                <div class="form-row">
+                    <label for="poolDepth" data-i18n="labelPoolDepth">Plas dikte [mm]:</label>
+                    <input type="number" id="poolDepth" value="0.48" min="0" max="5" step="0.01">
+                </div>
+                <div class="form-row">
+                    <label for="floorPH" data-i18n="labelFloorPH">pH:</label>
+                    <input type="number" id="floorPH" value="9.40" min="1" max="10" step="0.01">
+                </div>
+            </div>
+        </div>
+
+        <!-- Pit section -->
+        <div class="section">
+            <div class="section-header" data-i18n="sectionPit">Kelder</div>
+            <div class="section-body">
+                <!-- Pit mode radio buttons -->
+                <div class="pit-mode-row">
+                    <label>
+                        <input type="radio" name="pitMode" id="pitModeDefault" checked>
+                        <span data-i18n="labelDefaultPit">Standaard kelder:</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="pitMode" id="pitModeSpecific">
+                        <span data-i18n="labelSpecificPit">Specifieke kelder:</span>
+                    </label>
+                </div>
+
+                <!-- Pit percentage (always visible) -->
+                <div class="form-row">
+                    <label for="pitPercentage" data-i18n="labelPitPercentage">Percentage kelderemissie van standaard [%]:</label>
+                    <input type="number" id="pitPercentage" value="100" min="1" max="100" step="1">
+                </div>
+
+                <!-- Specific pit fields (disabled when default mode) -->
+                <div id="pitSpecificFields" class="pit-specific-fields disabled">
+                    <div class="form-row">
+                        <label for="pitArea" data-i18n="labelPitArea">Oppervlak [m&sup2;]:</label>
+                        <input type="number" id="pitArea" value="350" min="1" max="5000" step="1">
+                    </div>
+                    <div class="form-row">
+                        <label for="pitTemp" data-i18n="labelPitTemp">Temperatuur [&deg;C]:</label>
+                        <input type="number" id="pitTemp" value="10" min="0" max="40" step="0.1">
+                    </div>
+                    <div class="form-row">
+                        <label for="pitAirSpeed" data-i18n="labelPitAirSpeed">Luchtsnelheid [m/s]:</label>
+                        <input type="number" id="pitAirSpeed" value="0.05" min="0" max="2" step="0.01">
+                    </div>
+                    <div class="form-row">
+                        <label for="pitPH" data-i18n="labelPitPH">pH:</label>
+                        <input type="number" id="pitPH" value="8.40" min="1" max="10" step="0.01">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculate button -->
+        <div class="calculate-row">
+            <button class="btn-calculate" id="btnCalculate" data-i18n="buttonCalculate">Bereken</button>
+        </div>
+
+        <!-- Results -->
+        <div class="results-section" id="resultsSection">
+            <div class="results-header" data-i18n="resultHeader">Resultaten</div>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th data-i18n="resultGramPerHour">gram/uur</th>
+                        <th data-i18n="resultKgPerCowPerYear">kg/koe/jaar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-i18n="resultFloor">Vloer:</td>
+                        <td id="resultFloorGH">—</td>
+                        <td id="resultFloorKCY">—</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="resultPit">Kelder:</td>
+                        <td id="resultPitGH">—</td>
+                        <td id="resultPitKCY">—</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="resultTotal">Totaal:</td>
+                        <td id="resultTotalGH">—</td>
+                        <td id="resultTotalKCY">—</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="results-note" data-i18n="resultNote">
+                (Emissie van ammoniak (NH&sub3;) als gemiddelde van alle berekeningen)
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div data-i18n="footer1">AmmoniakEmissie Model V2.0 — Farm Technology Group — WUR</div>
+            <div><em data-i18n="footer2">Het model is slechts getest voor een beperkt aantal praktijksituaties.</em></div>
+            <div data-i18n="footer3">Gebaseerd op Snelstal (Monteny, 1998)</div>
+        </footer>
+
+    </div>
+
+    <!-- Scripts (order matters: model first, then translations, then app) -->
+    <script src="js/model.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
